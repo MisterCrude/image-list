@@ -1,32 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useGetImages, ImageDto } from "../api/images";
+import { isImage } from "../utils";
 
 const ImageListing = () => {
-  const {
-    isLoading,
-    isError,
-    data: images,
-  } = useQuery(["getImages"], async () => {
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/albums/1/photos`
-    );
+  const { isLoading, isError, data: images } = useGetImages();
 
-    if (!response.ok) {
-      throw new Error("An error occurred while fetching the data");
-    }
-    return response.json();
-  });
-  const [imageDetail, setImageDetail] = useState();
+  const [imageDetail, setImageDetail] = useState<ImageDto | null>(null);
   const [openImageModal, setOpenImageModal] = useState(false);
 
-  const handleToggleModal = (image) => {
-    const isOpen = Boolean(image);
+  const handleToggleModal = (image?: ImageDto) => {
+    const isOpen = isImage(image);
     setOpenImageModal(isOpen);
 
     isOpen && setImageDetail(image);
   };
-
-  console.log(openImageModal);
 
   if (isLoading) return <>Loading...</>;
 
