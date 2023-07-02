@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 const ImageListing = () => {
   const {
@@ -15,6 +16,17 @@ const ImageListing = () => {
     }
     return response.json();
   });
+  const [imageDetail, setImageDetail] = useState();
+  const [openImageModal, setOpenImageModal] = useState(false);
+
+  const handleToggleModal = (image) => {
+    const isOpen = Boolean(image);
+    setOpenImageModal(isOpen);
+
+    isOpen && setImageDetail(image);
+  };
+
+  console.log(openImageModal);
 
   if (isLoading) return <>Loading...</>;
 
@@ -22,9 +34,17 @@ const ImageListing = () => {
 
   return (
     <>
-      {images.map(({ id, url, title, thumbnailUrl }) => (
-        <div key={id}>
-          <img src={thumbnailUrl} alt={title} />
+      {openImageModal && (
+        <div>
+          <button onClick={() => handleToggleModal()}>x</button>
+          <img src={imageDetail.url} alt={imageDetail.title} />
+          <p>{imageDetail.title}</p>
+          <p>{imageDetail.albumId}</p>
+        </div>
+      )}
+      {images.map((image) => (
+        <div key={image.id} onClick={() => handleToggleModal(image)}>
+          <img src={image.thumbnailUrl} alt={image.title} />
         </div>
       ))}
     </>
