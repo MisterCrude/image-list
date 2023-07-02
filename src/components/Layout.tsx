@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useGetImages, ImageDto } from "@/api/images";
 import { isImage } from "@/utils";
+import Modal from "@/components/Modal";
+import ImageListing from "@/components/Listing";
 
-const ImageListing = () => {
+const Layout = () => {
   const { isLoading, isError, data: images } = useGetImages();
 
   const [imageDetail, setImageDetail] = useState<ImageDto | null>(null);
@@ -21,21 +23,15 @@ const ImageListing = () => {
 
   return (
     <>
-      {openImageModal && (
-        <div>
-          <button onClick={() => handleToggleModal()}>x</button>
-          <img src={imageDetail.url} alt={imageDetail.title} />
-          <p>{imageDetail.title}</p>
-          <p>{imageDetail.albumId}</p>
-        </div>
-      )}
-      {images.map((image) => (
-        <div key={image.id} onClick={() => handleToggleModal(image)}>
-          <img src={image.thumbnailUrl} alt={image.title} />
-        </div>
-      ))}
+      <ImageListing images={images} onClick={handleToggleModal} />
+
+      <Modal isOpen={openImageModal} onClose={() => handleToggleModal()}>
+        <img src={imageDetail?.url} alt={imageDetail?.title} />
+        <p>{imageDetail?.title}</p>
+        <p>{imageDetail?.albumId}</p>
+      </Modal>
     </>
   );
 };
 
-export default ImageListing;
+export default Layout;
