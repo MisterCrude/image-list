@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useGetImages, ImageDto } from "../api/images";
-import { isImage } from "../utils";
+import { useGetImages, ImageDto } from "@/api/images";
+import { isImage } from "@/utils";
 
 const ImageListing = () => {
   const { isLoading, isError, data: images } = useGetImages();

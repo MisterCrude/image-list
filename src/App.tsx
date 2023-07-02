@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ImageListing from "./ui/ImageListing";
+import ImageListing from "@/ui/ImageListing";
 
 const queryClient = new QueryClient();
 
