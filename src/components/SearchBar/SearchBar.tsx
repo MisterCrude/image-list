@@ -12,8 +12,9 @@ const SearchBar = ({ query, onChange }: SearchBarProps) => {
   };
 
   return (
-    <Box mb={10}>
+    <Box mb={5}>
       <Input
+        bgColor="white"
         placeholder="Find image by title"
         value={query}
         onChange={handleChange}
