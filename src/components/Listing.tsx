@@ -6,6 +6,8 @@ import {
   ButtonGroup,
   Button,
   Image,
+  Center,
+  Text,
 } from "@chakra-ui/react";
 
 interface ListingProps {
@@ -38,6 +40,14 @@ const Listing = ({ images, onClick }: ListingProps) => {
           </CardFooter>
         </Card>
       ))}
+
+      {images.length === 0 && (
+        <Center>
+          <Text fontSize="4xl" color="grey">
+            Not any images found!
+          </Text>
+        </Center>
+      )}
     </>
   );
 };
