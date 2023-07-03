@@ -1,28 +1,40 @@
 import { useState } from "react";
-import { useGetImages, ImageDto } from "@/api/images";
+import { Container } from "@chakra-ui/react";
 import { isImage } from "@/utils";
-import Modal from "@/components/Modal";
+import { useGetImages, ImageDto } from "@/api/images";
+import ErrorAlert from "./ErrorAlert";
 import ImageListing from "@/components/Listing";
+import ListingSkeleton from "@/components/ListingSkeleton";
+import Modal from "@/components/Modal";
 
 const Layout = () => {
-  const { isLoading, isError, data: images } = useGetImages();
-
   const [imageDetail, setImageDetail] = useState<ImageDto | null>(null);
   const [openImageModal, setOpenImageModal] = useState(false);
+
+  const { isLoading, isError, data: images } = useGetImages();
 
   const handleToggleModal = (image?: ImageDto) => {
     const isOpen = isImage(image);
     setOpenImageModal(isOpen);
-
     isOpen && setImageDetail(image);
   };
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading)
+    return (
+      <Container centerContent p={10} maxW="4xl">
+        <ListingSkeleton />
+      </Container>
+    );
 
-  if (isError) return <>An error occurred while fetching the image list.</>;
+  if (isError)
+    return (
+      <Container centerContent p={10} maxW="4xl">
+        <ErrorAlert />
+      </Container>
+    );
 
   return (
-    <>
+    <Container p={10} maxW="4xl">
       <ImageListing images={images} onClick={handleToggleModal} />
 
       <Modal isOpen={openImageModal} onClose={() => handleToggleModal()}>
@@ -30,7 +42,7 @@ const Layout = () => {
         <p>{imageDetail?.title}</p>
         <p>{imageDetail?.albumId}</p>
       </Modal>
-    </>
+    </Container>
   );
 };
 

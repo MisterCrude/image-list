@@ -1,4 +1,14 @@
 import { PropsWithChildren } from "react";
+import {
+  Modal as ModalUI,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+} from "@chakra-ui/react";
 
 type ModalProps = PropsWithChildren<{
   isOpen: boolean;
@@ -6,13 +16,18 @@ type ModalProps = PropsWithChildren<{
 }>;
 
 const Modal = ({ isOpen, onClose, children }: ModalProps) => {
-  if (!isOpen) return null;
-
   return (
-    <div>
-      <button onClick={onClose}>x</button>
-      {children}
-    </div>
+    <ModalUI isOpen={isOpen} size="xl" onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Image details</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>{children}</ModalBody>
+        <ModalFooter>
+          <Button onClick={onClose}>Close</Button>
+        </ModalFooter>
+      </ModalContent>
+    </ModalUI>
   );
 };
 
