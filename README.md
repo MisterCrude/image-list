@@ -6,10 +6,10 @@
 
 `$ npm run dev` - run application in development mode
 
-`$ npm run build` - build production version of application 
+`$ npm run build` - build production version of application
 
-`$ npm run lint` - run linting 
+`$ npm run lint` - run linting
 
 ### Used tools
 
-[`vite`](https://vitejs.dev/), [`ChakraUI`](https://chakra-ui.com/), [`zod`](https://zod.dev/), [`vercel`](https://vercel.com/), [`react-query`](https://tanstack.com/query/v3/)
+[`react.js`](https://react.dev/), [`vite`](https://vitejs.dev/), [`ChakraUI`](https://chakra-ui.com/), [`zod`](https://zod.dev/), [`vercel`](https://vercel.com/), [`react-query`](https://tanstack.com/query/v3/)
