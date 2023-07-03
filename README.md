@@ -2,10 +2,13 @@
 
 #### [Live demo](https://image-list-fhlgsdi88-mistercrude.vercel.app/)
 
-
 ### Commands
 
-`$ npm run dev` - run development mode
+`$ npm run dev` - run application in development mode
+
+`$ npm run build` - build production version of application 
+
+`$ npm run lint` - run linting 
 
 ### Used tools
 
